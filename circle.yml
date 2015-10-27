@@ -6,4 +6,5 @@ dependencies:
   - mvn install -DskipTests    
 test:
   post:
-    - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+    - mvn clean install cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report -X -DrepoToken=wex90LJ7NyAHoySxGTl33uhFVdyGk7EEg
+
