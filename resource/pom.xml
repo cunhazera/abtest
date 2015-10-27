@@ -10,9 +10,6 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<test.lineRate>0</test.lineRate>
-		<test.totalLineRate>0</test.totalLineRate>
-		<test.totalBranchRate>0</test.totalBranchRate>
 		<test.mutation>true</test.mutation>
 	</properties>
 	
