@@ -1,0 +1,72 @@
+
+<h3>Adicionar produtos:</h3>
+
+<input class="form-control"  id="saleId" name="id" type="hidden">
+
+<form id="saleForm" class="form-inline">
+	<input class="form-control"  id="saleItemId" name="itemId" type="hidden">
+	<input class="form-control"  id="productId" name="product.id" type="hidden">
+	<div class="form-group">
+		<label for="name">Produto</label> 
+		<input class="form-control ignore"  id="productName" name="productName" type="text" class="required">
+	</div>	
+	<div class="form-group">
+		<label for="name">Quantidade</label> 
+		<input class="form-control" id="quantity" name="quantity" type="number" class="required">
+	</div>	
+	<div class="form-group">
+		<label for="name">Valor Unitário</label> 
+		<input class="form-control" id="value" name="value" type="number" class="required">
+	</div>
+
+	<div class="form-group">
+		<label for="name">Imposto</label> 
+		<input class="form-control" id="tax" name="tax" type="number" readonly>
+	</div>
+	<div class="form-group">
+		<label for="name">Total</label> 
+		<input class="form-control" id="total" name="total" type="number" readonly>
+	</div>
+
+	<div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button type="button" id="addProduct" class="btn btn-success">Adicionar</button>
+        </div>
+    </div>
+</form>
+
+
+
+<table class="saleProductListTable table table-striped">
+<h3>Itens da venda:</h3>
+	<tr>
+		<th>Produto</th>
+		<th>Quantidade</th>
+		<th>Valor Unitário</th>
+		<th>Impostos</th>
+		<th>Total</th>
+	</tr>
+	</thead>
+	<tbody id="saleProductsList">
+		<tr id="rowTemplate" class="hidden">
+			<td class="saleItemId hidden"></td>
+			<td class="productId hidden"></td>
+			<td class="productName"></td>
+			<td class="quantity"></td>
+			<td class="value"></td>
+			<td class="tax"></td>
+			<td class="total"></td>
+		</tr>
+	</tbody>
+</table>
+<form id="saleTotals" class="form-inline">
+	<div class="form-group">
+		<label for="name">Total de impostos na venda</label> 
+		<input class="form-control" id="taxTotal" name="taxTotal" type="number" readonly>
+	</div>
+	<div class="form-group">
+		<label for="name">Total da Venda</label> 
+		<input class="form-control" id="totalSale" name="total" type="number" readonly>
+	</div>
+</form>
+<button type="button" id="saveSale" class="btn btn-success">Salvar Venda</button>

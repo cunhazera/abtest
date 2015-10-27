@@ -1,0 +1,25 @@
+<form id="productForm">
+
+	<input class="form-control"  id="productId" name="id" type="hidden">
+	<div class="form-group">
+		<label for="name">Nome do produto</label> 
+		<input class="form-control" name="name" type="text" class="required">
+	</div>
+	<div class="form-group">
+		<label for="name">Valor</label> 
+		<input class="form-control" name="value" type="number" class="required">
+	</div>
+	<input class="form-control"  id="idTax" name="tax.id" type="hidden">
+	<div class="form-group">
+		<label for="name">Nome do imposto</label> 
+		<input class="form-control ignore"  id="taxName" name="taxName" type="text" class="required">
+	</div>	 
+
+  	<div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button type="button" id="saveProductButton" class="btn btn-success">Salvar</button>
+            <button type="button" id="deleteProductButton" class="btn btn-danger" disabled>Deletar</button>
+        </div>
+    </div>
+
+</form>
