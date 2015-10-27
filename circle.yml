@@ -4,3 +4,6 @@ machine:
 dependencies:
  override: 
   - mvn install -DskipTests    
+test:
+  post:
+    - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report

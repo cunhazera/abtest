@@ -1,4 +1,4 @@
 languages:
    Java: true
-	exclude_paths:
-- "src/test/*"
+exclude_paths:
+- "test/*"
