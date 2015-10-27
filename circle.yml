@@ -1,4 +1,6 @@
-oraclejdk8
+machine:
+  java:
+    version: oraclejdk8
 dependencies:
  override: 
   - mvn install -DskipTests    
