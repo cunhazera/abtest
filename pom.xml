@@ -139,6 +139,12 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<jacocoReports>
+						<jacocoReport>module1/target/site/jacoco-it/jacoco.xml</jacocoReport>
+						<jacocoReport>module1/target/site/jacoco-ut/jacoco.xml</jacocoReport>
+					</jacocoReports>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -171,6 +177,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>4.0.0</version>
 			</plugin>
 		</plugins>
 	</build>
