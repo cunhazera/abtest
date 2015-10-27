@@ -37,8 +37,7 @@ public abstract class AbstractService<T> {
 		try {
 			return repository.save(entity);
 		} catch (Exception e) {
-			throw new AppException(
-					"Ops... erro ao salvar, verifique se todos os dados então preenchidos corretamente :(");
+			throw new AppException("Ops... erro ao salvar, verifique se todos os dados então preenchidos corretamente :(");
 		}
 	}
 
@@ -54,8 +53,7 @@ public abstract class AbstractService<T> {
 		try {
 			return repository.edit(entity);
 		} catch (Exception e) {
-			throw new AppException(
-					"Ops... registro não pode ser editado, verifique se todos os dados então preenchidos corretamente.");
+			throw new AppException("Ops... registro não pode ser editado, verifique se todos os dados então preenchidos corretamente.");
 		}
 	}
 
