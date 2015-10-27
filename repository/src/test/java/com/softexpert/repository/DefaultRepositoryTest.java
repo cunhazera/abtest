@@ -97,6 +97,8 @@ public class DefaultRepositoryTest {
 	}
 
 	private SampleEntity createSample() {
-		return new SampleEntity.builder().id(DUMMY_ID).build();
+		SampleEntity sampleEntity = new SampleEntity();
+		sampleEntity.id = DUMMY_ID;
+		return sampleEntity;
 	}
 }

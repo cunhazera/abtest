@@ -48,7 +48,7 @@ public class SampleEntityServiceTest {
 
 	@Test(expected=AppException.class)
 	public void createWithValidationError() throws AppException {
-		SampleEntity sample = SampleEntity.builder().name("IPI").build();
+		SampleEntity sample = createSampleEntity(ID, "IPI");
 		Set<ConstraintViolation<SampleEntity>> violations =  new HashSet<>();
 		ConstraintViolation constraintViolation = Mockito.mock(ConstraintViolation.class);
 		violations.add(constraintViolation);
@@ -60,8 +60,8 @@ public class SampleEntityServiceTest {
 
 	@Test
 	public void create() throws AppException {
-		SampleEntity sample = SampleEntity.builder().name("IPI").build();
-		Mockito.when(repository.save(sample)).thenReturn(createSample());
+		SampleEntity sample = createSampleEntity(ID, "IPI");
+		Mockito.when(repository.save(sample)).thenReturn(createSampleEntity(ID, "IPI"));
 
 		SampleEntity newSample = service.create(sample);
 
@@ -71,8 +71,8 @@ public class SampleEntityServiceTest {
 	
 	@Test
 	public void edit() throws AppException {
-		SampleEntity sample = SampleEntity.builder().id(ID).name("IPI").build();
-		Mockito.when(repository.edit(sample)).thenReturn(createSample());
+		SampleEntity sample = createSampleEntity(ID, "IPI");
+		Mockito.when(repository.edit(sample)).thenReturn(createSampleEntity(ID, null));
 
 		SampleEntity newSample = service.edit(sample);
 
@@ -83,11 +83,11 @@ public class SampleEntityServiceTest {
 
 	@Test
 	public void delete() throws AppException {
-		Mockito.when(repository.findById(ID, SampleEntity.class)).thenReturn(createSample());
+		Mockito.when(repository.findById(ID, SampleEntity.class)).thenReturn(createSampleEntity(ID, null));
 
 		service.delete(ID);
 
-		Mockito.verify(repository).delete(createSample());
+		Mockito.verify(repository).delete(createSampleEntity(ID, null));
 	}
 	
 	@Test(expected=AppException.class)
@@ -96,7 +96,7 @@ public class SampleEntityServiceTest {
 
 		service.delete(ID);
 
-		Mockito.verify(repository).delete(createSample());
+		Mockito.verify(repository).delete(createSampleEntity(ID, null));
 	}
 
 	@Test
@@ -107,17 +107,17 @@ public class SampleEntityServiceTest {
 		Mockito.verify(repository).all(QSampleEntity.sampleEntity, QSampleEntity.sampleEntity);
 
 		MatcherAssert.assertThat(list, Matchers.hasSize(1));
-		MatcherAssert.assertThat(list, Matchers.contains(createSample()));
+		MatcherAssert.assertThat(list, Matchers.contains(createSampleEntity(ID, null)));
 	}
 
 	@Test
 	public void find() throws AppException {
-		Mockito.when(repository.findById(ID, SampleEntity.class)).thenReturn(createSample());
+		Mockito.when(repository.findById(ID, SampleEntity.class)).thenReturn(createSampleEntity(ID, null));
 
 		SampleEntity sample = service.find(ID);
 
 		Mockito.verify(repository).findById(ID, SampleEntity.class);
-		MatcherAssert.assertThat(sample, Matchers.equalTo(createSample()));
+		MatcherAssert.assertThat(sample, Matchers.equalTo(createSampleEntity(ID, null)));
 	}
 
 	@Test
@@ -141,14 +141,14 @@ public class SampleEntityServiceTest {
 
 	@Test(expected = AppException.class)
 	public void editWithError() throws AppException {
-		when(repository.edit(createSample())).thenThrow(new IllegalArgumentException("Error"));
-		service.edit(createSample());
+		when(repository.edit(createSampleEntity(ID, null))).thenThrow(new IllegalArgumentException("Error"));
+		service.edit(createSampleEntity(ID, null));
 	}
 
 	@Test(expected = AppException.class)
 	public void createWithError() throws AppException {
-		when(repository.save(createSample())).thenThrow(new IllegalArgumentException("Error"));
-		service.create(createSample());
+		when(repository.save(createSampleEntity(ID, null))).thenThrow(new IllegalArgumentException("Error"));
+		service.create(createSampleEntity(ID, null));
 	}
 
 	@Test
@@ -160,14 +160,18 @@ public class SampleEntityServiceTest {
 		Mockito.verify(repository).list(QSampleEntity.sampleEntity, service.getFilter(schearch), QSampleEntity.sampleEntity);
 
 		MatcherAssert.assertThat(list, Matchers.hasSize(1));
-		MatcherAssert.assertThat(list, Matchers.contains(createSample()));
+		MatcherAssert.assertThat(list, Matchers.contains(createSampleEntity(ID, null)));
 	}
 
 	private List<SampleEntity> getList() {
-		return Collections.singletonList(createSample());
+		return Collections.singletonList(createSampleEntity(ID, null));
 	}
 
-	private SampleEntity createSample() {
-		return SampleEntity.builder().id(ID).build();
+	private SampleEntity createSampleEntity(Long id, String name) {
+		SampleEntity sample = new SampleEntity();
+		sample.id = id;
+		sample.name = name;
+		return sample;
 	}
+	
 }
