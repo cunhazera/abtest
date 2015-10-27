@@ -1,4 +1,0 @@
-languages:
-   Java: true
-exclude_paths:
-- "test/*"
