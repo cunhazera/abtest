@@ -18,6 +18,11 @@ import com.softexpert.repository.DefaultRepository;
 
 public abstract class AbstractService<T> {
 
+	private static final String DELETE_ERROR = "Ops... registro não pode ser removido ou está send utilizado.";
+	private static final String COULD_NOT_EDIT_ERROR = "Ops... registro não pode ser editado, verifique se todos os dados então preenchidos corretamente.";
+	private static final String SAVE_ERROR = "Ops... erro ao salvar, verifique se todos os dados então preenchidos corretamente :(";
+	private static final String SEARCH_ERROR = "Ops... ocorreu erro ao buscas, registro pode não existir mais.";
+	
 	@Inject
 	protected DefaultRepository<T> repository;
 	@Inject
@@ -28,7 +33,7 @@ public abstract class AbstractService<T> {
 		try {
 			return repository.findById(id, getEntityClass());
 		} catch (Exception e) {
-			throw new AppException("Ops... ocorreu erro ao buscas, registro pode não existir mais.");
+			throw new AppException(SEARCH_ERROR);
 		}
 	}
 
@@ -37,7 +42,7 @@ public abstract class AbstractService<T> {
 		try {
 			return repository.save(entity);
 		} catch (Exception e) {
-			throw new AppException("Ops... erro ao salvar, verifique se todos os dados então preenchidos corretamente :(");
+			throw new AppException(SAVE_ERROR);
 		}
 	}
 
@@ -53,7 +58,7 @@ public abstract class AbstractService<T> {
 		try {
 			return repository.edit(entity);
 		} catch (Exception e) {
-			throw new AppException("Ops... registro não pode ser editado, verifique se todos os dados então preenchidos corretamente.");
+			throw new AppException(COULD_NOT_EDIT_ERROR);
 		}
 	}
 
@@ -62,7 +67,7 @@ public abstract class AbstractService<T> {
 		try {
 			repository.delete(find(id));
 		} catch (Exception e) {
-			throw new AppException("Ops... registro não pode ser removido ou está send utilizado.");
+			throw new AppException(DELETE_ERROR);
 		}
 	}
 
@@ -76,7 +81,7 @@ public abstract class AbstractService<T> {
 
 	private void validation(T entity) throws AppException {
 		Set<ConstraintViolation<T>> violations = validator.validate(entity);
-		if (violations.size() > 0)
+		if (!violations.isEmpty())
 			throw new AppException(violations.iterator().next().getMessage());
 	}
 }

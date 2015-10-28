@@ -1,5 +1,7 @@
 package com.softexpert.resource;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,15 +15,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 
 import com.softexpert.business.SampleEntityService;
 import com.softexpert.business.exception.AppException;
 import com.softexpert.persistence.SampleEntity;
 
 @Path("sample")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(APPLICATION_JSON)
+@Produces(APPLICATION_JSON)
 public class SampleEntityResource {
 
 	@Inject
