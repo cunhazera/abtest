@@ -6,6 +6,7 @@ import java.net.URI;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.hamcrest.MatcherAssert;
@@ -27,20 +28,26 @@ public class SampleEntityResourceTest {
 	@ArquillianResource
 	private URI base;
 
-	private static WebTarget target;
+	private WebTarget target;
 
 	@Deployment(testable = false)
 	public static WebArchive deploy() {
 		File webXML = new File("src/main/webapp/WEB-INF/web.xml");
 		return ShrinkWrap.create(WebArchive.class)
-				.addClasses(SampleEntityResource.class, SampleEntity.class, AppException.class).setWebXML(webXML);
+				.addClasses(SampleEntityResource.class, SampleEntity.class)
+				.setWebXML(webXML);
 	}
 
 	@Test
 	public void getSamples() throws Exception {
 		Client client = ClientBuilder.newClient();
 		target = client.target(base);
-		Response response = target.path("/v1/samples").request().get();
-		MatcherAssert.assertThat(response.getStatus(), Matchers.equalTo(200));
+		SampleEntity response = target.path("/v1/samples")
+				.request(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+				.get(SampleEntity.class);
+		MatcherAssert.assertThat(response.name, Matchers.equalTo("Test"));
+		MatcherAssert.assertThat(response.id, Matchers.equalTo(1L));
 	}
+
 }
