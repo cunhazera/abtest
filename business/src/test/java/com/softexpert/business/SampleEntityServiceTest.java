@@ -24,7 +24,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.querydsl.core.types.Predicate;
-import com.softexpert.business.AbstractService;
 import com.softexpert.business.SampleEntityService;
 import com.softexpert.business.exception.AppException;
 import com.softexpert.persistence.QSampleEntity;
@@ -126,11 +125,6 @@ public class SampleEntityServiceTest {
 		Predicate filter = service.getFilter(schearch);
 		MatcherAssert.assertThat(filter,
 				Matchers.equalTo(QSampleEntity.sampleEntity.name.containsIgnoreCase(schearch)));
-	}
-
-	@Test
-	public void validateExntedsClass() {
-		assertThat(service, Matchers.instanceOf(AbstractService.class));
 	}
 
 	@Test(expected = AppException.class)
