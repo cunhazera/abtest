@@ -20,6 +20,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<test.mutation>false</test.mutation>
 		<test.totalMutation>85</test.totalMutation>
+		<dependency.skip>false</dependency.skip>
 	</properties>
 
 	<dependencyManagement>
@@ -116,6 +117,7 @@
 								<ignoredDependency>org.hamcrest:hamcrest-core:jar:1.3</ignoredDependency>
 								<ignoredDependency>org.glassfish.jersey.core:jersey-common:jar:2.4.1</ignoredDependency>
 							</ignoredDependencies>
+							<skip>${dependency.skip}</skip>
 						</configuration>
 					</execution>
 				</executions>
