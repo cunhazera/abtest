@@ -57,7 +57,7 @@ public class SampleEntityResourceTest {
 	}
 
 	@Test
-	public void list() throws Exception {
+	public void post() throws Exception {
 		Client client = ClientBuilder.newClient();
 		target = client.target(base);
 		SampleEntity entity = new SampleEntity();
