@@ -11,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import com.softexpert.business.SampleEntityService;
 import com.softexpert.business.exception.AppException;
@@ -25,11 +26,8 @@ public class SampleEntityResource {
 	private SampleEntityService service;
 
 	@GET
-	public SampleEntity get() {
-		SampleEntity sampleEntity = new SampleEntity();
-		sampleEntity.id = 1L;
-		sampleEntity.name = "Test";
-		return sampleEntity;
+	public List<SampleEntity> get(@QueryParam("search") String search) {
+		return service.list(search);
 	}
 	
 	@POST
