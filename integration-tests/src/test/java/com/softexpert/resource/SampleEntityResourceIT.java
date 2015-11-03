@@ -1,7 +1,9 @@
 package com.softexpert.resource;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -19,12 +21,13 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
+import org.junit.experimental.theories.Theories;
 import org.junit.runner.RunWith;
 
 import com.softexpert.persistence.SampleEntity;
 
 @RunWith(Arquillian.class)
-public class SampleEntityResourceTest {
+public class SampleEntityResourceIT {
 
 	@ArquillianResource
 	private URI base;
@@ -33,14 +36,13 @@ public class SampleEntityResourceTest {
 
 	@Deployment(testable = false)
 	public static WebArchive deploy() {
-		File webXML = new File("src/main/webapp/WEB-INF/web.xml");
+		URL webXML = SampleEntityResourceIT.class.getResource("web.xml");
 		File[] archives = Maven.resolver().loadPomFromFile("pom.xml")
 				.importRuntimeDependencies()
 				.resolve()
 				.withTransitivity()
 				.asFile();
 		return ShrinkWrap.create(WebArchive.class)
-				.addClasses(SampleEntityResource.class, SampleEntity.class)
 				.setWebXML(webXML)
 				.addAsLibraries(archives);
 	}

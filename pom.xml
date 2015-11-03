@@ -57,6 +57,13 @@
 			</dependency>
 			<dependency>
 				<groupId>com.softexpert</groupId>
+				<artifactId>resource</artifactId>
+				<version>${project.version}</version>
+				<classifier>classes</classifier>
+				 <type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.softexpert</groupId>
 				<artifactId>business</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -97,6 +104,7 @@
 		<module>repository</module>
 		<module>business</module>
 		<module>resource</module>
+		<module>integration-tests</module>
 	</modules>
 
 	<build>
